@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -31,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import coil.size.Scale
 import com.example.a1revision6.R
 import com.example.a1revision6.data.Cat
 import com.example.a1revision6.viewmodel.UsersViewModel
@@ -97,11 +99,21 @@ fun CatListItem(cat: Cat) {
                 AsyncImage(
                     model = "https://cataas.com/cat/${cat.id}",
                     contentDescription = "Cute cat",
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
+                        .fillMaxWidth()
                         .size(400.dp)
                         .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)
                 )
             }
 
     }
+}
+
+@Preview (showBackground = true)
+@Composable
+fun PreviewCatItem(){
+    val list = ArrayList<String>()
+
+    CatListItem(cat = Cat("0123", "0123", "0123", list, ""))
 }
